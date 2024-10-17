@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./styles.module.css"
 import { useNavigate } from "react-router-dom";
 
-const Body = () => {
+const Body = ({messages}) => {
     
     const navigate = useNavigate()
+
     const handleLeave = () => {
         localStorage.removeItem('user')
         navigate('/')
@@ -17,19 +18,25 @@ const Body = () => {
             </header>
 
             <div className={styles.container}>
-                <div className={styles.chats}>
-                    <p className={styles.senderName}>Вы</p>
-                    <div className={styles.messageSender}>
-                        <p>Hello</p>
-                    </div>
-                </div>
-
-                <div className={styles.chats}>
-                    <p>Вы</p>
-                    <div className={styles.messageRecipient}>
-                        <p>Hello</p>
-                    </div>
-                </div>
+                {
+                    messages.map(element =>
+                        element.name === localStorage.getItem('user') ? (
+                            <div className={styles.chats} key={element.id}>
+                                <p className={styles.senderName}>Вы</p>
+                                <div className={styles.messageSender}>
+                                    <p>{element.text}</p>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className={styles.chats}>
+                                <p>{element.name}</p>
+                                <div className={styles.messageRecipient}>
+                                    <p>{element.text}</p>
+                                </div>
+                            </div>
+                        )
+                    )
+                }
             </div>
         </>    
     )
