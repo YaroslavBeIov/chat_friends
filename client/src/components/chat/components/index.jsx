@@ -1,7 +1,7 @@
 import React from "react"
 import Sidebar from "./sidebar/sidebar";
 import Body from "./body/body";
-import MessageBlock from "./message-block/message-block";
+import MessageBlock from "./message-block/message-block.jsx";
 import styles from './styles.module.css'
 
 const ChatPage = ({socket}) => {
