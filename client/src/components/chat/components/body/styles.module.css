@@ -2,9 +2,10 @@
     height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding: 20px;
+    justify-content: space-between; /* Размещает элементы по краям */
+    padding: 0 20px;
     border-bottom: 1px solid #bfbdbd;
+    background-color: #f486cf;
 }
 
 .btn {
@@ -51,4 +52,25 @@
     border-radius: 10px;
     margin-left: auto;
     font-size:15px;
+}
+
+.senderName{
+    color: #d419a2;
+}
+
+.opponentName{
+    color: #d419a2;
+}
+
+.textMessage{
+    color: #d419a2;
+}
+
+/* styles.module.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(blue, pink);
 }

@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .container > *{
@@ -30,4 +31,12 @@
     outline: none;
     border: none;
     border-radius: 5px;
+}
+
+.open{
+    color: #d419a2
+}
+
+.button{
+    color: #d419a2
 }

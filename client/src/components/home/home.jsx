@@ -15,10 +15,10 @@ const Home = ({socket}) => {
 
     return (
         <form onSubmit={handleSubmit} className={styles.container}>
-            <h2>Вход в чат</h2>
+            <h2 className={styles.open}>Вход в чат</h2>
             <label htmlFor="user"></label>
             <input type="text" id='user' value={user} onChange={(e) => setUser(e.target.value)}/>
-            <button type='submit'>Войти</button>
+            <button type='submit' className={styles.button}>Войти</button>
         </form>
     )
 }

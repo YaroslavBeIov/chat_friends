@@ -1,17 +1,44 @@
-import React from "react";
-import styles from "./styles.module.css"
+import React, { useEffect, useState } from "react";
+import styles from "./styles.module.css";
 
-const Sidebar = () => {
+const Sidebar = ({ socket }) => {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        const handleSocketConnection = () => {
+            socket.on('responseNewUser', (data) => setUsers(data));
+        };
+
+        if (socket && socket.connected) {
+            handleSocketConnection();
+        } else if (socket) {
+            socket.on('connect', handleSocketConnection);
+        }
+
+        return () => {
+            if (socket) {
+                socket.off('responseNewUser');
+                socket.off('connect', handleSocketConnection);
+            }
+        };
+    }, [socket]);
+
+    const filteredList = users.filter((value, index, self) =>
+        index === self.findIndex((t) => (
+            t.user === value.user && t.socketID === value.socketID
+        ))
+    );
+
     return (
         <div className={styles.sidebar}>
-            <h4 classname={styles.header}>Users</h4>
-            <ul classname={styles.users}>
-                <li>User1</li>
-                <li>User2</li>
-                <li>User3</li>
+            <h4 className={styles.header}>Users</h4>
+            <ul className={styles.users}>
+                {filteredList.map((element) => (
+                    <li key={element.socketID}>{element.user}</li>
+                ))}
             </ul>
         </div>
-    )
-}
+    );
+};
 
-export default Sidebar
+export default Sidebar;

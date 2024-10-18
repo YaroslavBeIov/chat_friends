@@ -17,8 +17,18 @@ app.get('api', (req,res) =>
     })
 })
 
+const users = []
+
 socketIO.on('connection', (socket) =>{
     console.log(`${socket.id} user connected`)
+    socket.on('message', (data) =>{
+        socketIO.emit('response', data)
+    })
+
+    socket.on('newUser', (data) =>{
+        users.push(data)
+        socketIO.emit('responseNewUser', users)
+    })
     socket.on('disconnect', () => {
         console.log(`${socket.id} disconnect`)
     })
