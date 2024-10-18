@@ -4,6 +4,8 @@ import styles from "./styles.module.css"
 const MessageBlock = ({socket}) => {
     const [message, setMessage] = useState('')
 
+    const isTyping = () => socket.emit('typing', `${localStorage.getItem('user')} is typing`)
+
     const handleSend = (e) => {
         e.preventDefault()
         if(message.trim() && localStorage.getItem('user')){
@@ -24,6 +26,7 @@ const MessageBlock = ({socket}) => {
                 className={styles.userMessage}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={isTyping}
                 />
                 <button className={styles.btn}>Сказать</button>
             </form>

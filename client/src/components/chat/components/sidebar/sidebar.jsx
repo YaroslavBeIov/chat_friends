@@ -7,7 +7,7 @@ const Sidebar = ({ socket }) => {
     useEffect(() => {
         const handleSocketConnection = () => {
             socket.on('responseNewUser', (data) => setUsers(data));
-        };
+        }
 
         if (socket && socket.connected) {
             handleSocketConnection();
@@ -21,7 +21,7 @@ const Sidebar = ({ socket }) => {
                 socket.off('connect', handleSocketConnection);
             }
         };
-    }, [socket]);
+    }, [socket, users]);
 
     const filteredList = users.filter((value, index, self) =>
         index === self.findIndex((t) => (
