@@ -7,9 +7,8 @@ const Navigation = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        // Проверяем, зарегистрирован ли пользователь (например, по флагу в localStorage)
         const user = localStorage.getItem("user");
-        setIsAuthenticated(!!user); // Устанавливаем true, если пользователь найден
+        setIsAuthenticated(!!user);
     }, []);
 
     const handleNavigate = (path) => {
@@ -25,7 +24,8 @@ const Navigation = () => {
                 >
                     Главная
                 </button>
-                {isAuthenticated && ( // Кнопка видна только зарегистрированным пользователям
+
+                {isAuthenticated && (
                     <button 
                         className={`${styles.navButton} ${styles.chatButton}`} 
                         onClick={() => handleNavigate('/chat')}
@@ -33,9 +33,10 @@ const Navigation = () => {
                         Чат
                     </button>
                 )}
+
                 <button 
-                    className={styles.navButton} 
-                    onClick={() => handleNavigate('/log_chat')}
+                    className={`${styles.navButton} ${styles.registerButton}`} 
+                    onClick={() => handleNavigate('/register')}
                 >
                     Регистрация
                 </button>

@@ -1,20 +1,6 @@
-.header {
-    position: fixed; /* Закрепляем в верхней части экрана */
-    top: 0;
-    left: 0;
-    width: 100%; /* На всю ширину экрана */
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #d419a2;
-    padding: 0 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */
-    z-index: 1000; /* Поверх всех элементов */
-}
-
 .nav {
     display: flex;
-    width: 100%; /* Растягиваем на всю ширину */
+    width: 100%;
     align-items: center;
 }
 
@@ -36,5 +22,9 @@
 }
 
 .chatButton {
+    margin-left: 10px;
+}
+
+.registerButton {
     margin-left: auto;
 }

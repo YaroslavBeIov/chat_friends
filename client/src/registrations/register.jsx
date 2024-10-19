@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from './api';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './styles.module.css';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -8,7 +12,8 @@ function Register() {
     password: '',
     age: '',
   });
-  const [message, setMessage] = useState('');
+  
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,15 +24,33 @@ function Register() {
     e.preventDefault();
     try {
       const response = await registerUser(formData);
-      setMessage(response.data.message);
-      setFormData({ name: '', email: '', password: '', age: '' });
+      switch (response.status) {
+        case 201:
+          toast.success(response.data.message || 'Вы успешно зарегистрированы!', {
+          });
+
+          setFormData({ name: '', email: '', password: '', age: '' });
+          setTimeout(() => navigate('/main'), 3000);
+          break;
+        case 400:
+          toast.error(response.data.message || 'Ошибка при регистрации');
+          break;
+        default:
+          toast.error('Произошла непредвиденная ошибка. Попробуйте позже.');
+          break;
+      }
     } catch (error) {
-      setMessage(error.response.data.message || 'Ошибка при регистрации');
+      console.error('Ошибка регистрации:', error.response?.data || error);
+      if (toast) {
+        toast.error(error.response?.data?.message || 'Ошибка при регистрации');
+      } else {
+        console.error('Toast не инициализирован');
+      }
     }
   };
 
   return (
-    <div className="App">
+    <div className={styles.container}>
       <h1>Регистрация</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -64,7 +87,7 @@ function Register() {
         />
         <button type="submit">Зарегистрироваться</button>
       </form>
-      {message && <p>{message}</p>}
+      <ToastContainer />
     </div>
   );
 }

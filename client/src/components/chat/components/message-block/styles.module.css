@@ -12,14 +12,14 @@
 }
 
 .userMessage {
-    width: 100%; /* Растягивает поле ввода на всю ширину родительского контейнера */
+    width: 100%;
     padding: 15px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
     transition: border-color 0.2s;
-    box-sizing: border-box; /* Включает padding и border в ширину */
+    box-sizing: border-box;
 }
 
 .btn {
