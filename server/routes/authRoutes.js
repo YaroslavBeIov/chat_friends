@@ -6,22 +6,24 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  const { name, email, password, age } = req.body;
-  try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email уже зарегистрирован' });
+    const { name, email, password, age } = req.body;
+    console.log("Полученные данные:", req.body);
+    try {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({ message: 'Email уже зарегистрирован' });
+      }
+  
+      const user = new User({ name, email, password, age });
+      await user.save();
+      console.log("Пользователь успешно зарегистрирован:", user);
+      res.status(201).json({ message: 'Пользователь успешно зарегистрирован' });
+    } catch (err) {
+      console.error("Ошибка сервера:", err);
+      res.status(500).json({ message: 'Ошибка сервера' });
     }
-
-    const user = new User({ name, email, password, age });
-    await user.save();
-    res.status(201).json({ message: 'Пользователь успешно зарегистрирован' });
-  } catch (err) {
-    res.status(500).json({ message: 'Ошибка сервера' });
-  }
-});
-
-// Логин пользователя
+  });
+  
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
