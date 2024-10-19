@@ -1,0 +1,40 @@
+.header {
+    position: fixed; /* Закрепляем в верхней части экрана */
+    top: 0;
+    left: 0;
+    width: 100%; /* На всю ширину экрана */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #d419a2;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    z-index: 1000; /* Поверх всех элементов */
+}
+
+.nav {
+    display: flex;
+    width: 100%; /* Растягиваем на всю ширину */
+    align-items: center;
+}
+
+.navButton {
+    background-color: #fff;
+    border: 1px solid #d419a2;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #d419a2;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.navButton:hover {
+    background-color: #d419a2;
+    color: white;
+}
+
+.chatButton {
+    margin-left: auto;
+}
