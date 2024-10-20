@@ -4,6 +4,7 @@ import ChatPage from './components/chat/components/index.jsx';
 import Main from './components/main/main.jsx';
 import Register from './registrations/register.jsx';
 import Navigation from './components/navigation/navigation.jsx';
+import Login from './login/login.jsx'
 import { Route, Routes } from 'react-router-dom';
 import styles from '../src/styles.module.css';
 
@@ -19,6 +20,7 @@ function App() {
   
       <div className={styles.content}>
         <Routes>
+          <Route path="/login" element={<Login socket={socket} />} />
           <Route path="/register" element={<Register socket={socket} />} />
           <Route path="/main" element={<Main socket={socket} />} />
           <Route path="/log_chat" element={<Home socket={socket} />} />

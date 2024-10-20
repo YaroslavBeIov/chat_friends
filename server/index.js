@@ -4,7 +4,7 @@ const PORT = 5000
 const http = require('http').Server(app)
 const cors = require('cors')
 const connectDB = require('./config/database')
-const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/routes')
 const socketIO = require('socket.io')(http,{
     cors: {
         origin: 'http://localhost:5173'

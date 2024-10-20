@@ -7,8 +7,9 @@ const Navigation = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        const user = localStorage.getItem("user");
-        setIsAuthenticated(!!user);
+        // Проверяем наличие токена в локальном хранилище
+        const token = localStorage.getItem("token"); // Замените 'user' на 'token'
+        setIsAuthenticated(!!token); // Устанавливаем статус авторизации на основе наличия токена
     }, []);
 
     const handleNavigate = (path) => {
@@ -34,12 +35,23 @@ const Navigation = () => {
                     </button>
                 )}
 
-                <button 
-                    className={`${styles.navButton} ${styles.registerButton}`} 
-                    onClick={() => handleNavigate('/register')}
-                >
-                    Регистрация
-                </button>
+                {/* Отображаем кнопки только для неавторизованных пользователей */}
+                {!isAuthenticated && (
+                    <div className={styles.authButtons}>
+                        <button 
+                            className={`${styles.navButton} ${styles.loginButton}`} 
+                            onClick={() => handleNavigate('/login')}
+                        >
+                            Авторизация
+                        </button>
+                        <button 
+                            className={`${styles.navButton} ${styles.registerButton}`} 
+                            onClick={() => handleNavigate('/register')}
+                        >
+                            Регистрация
+                        </button>
+                    </div>
+                )}
             </nav>
         </header>
     );

@@ -8,10 +8,16 @@ const userSchema = new mongoose.Schema({
   age: { type: Number, required: true },
 });
 
+// Хэширование пароля перед сохранением
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
+
+// Метод для сравнения паролей
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 module.exports = mongoose.model('User', userSchema);
